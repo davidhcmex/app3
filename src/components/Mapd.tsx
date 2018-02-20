@@ -1,6 +1,7 @@
 import * as React from 'react'
 //import * as ReactDOM from 'react-dom'
 import * as mapboxgl from 'mapbox-gl'
+import {SliderValue} from "./slider_values";
 //import './mapbox-gl.css';
 var data = require('./data.json');
 
@@ -42,13 +43,14 @@ const options = [{
 
 
 
-export class Mapd extends React.Component<{},{active:any}> {
+export class Mapd extends React.Component<{},{active:any,visibilityH:number}> {
   
 
   constructor(props:any) {
     super(props);
     this.state = {
-      active: options[0]
+      active: options[0],
+      visibilityH:0
     };
   }
 
@@ -86,7 +88,7 @@ export class Mapd extends React.Component<{},{active:any}> {
       property,
       stops
     });    
-    this['map'].setPaintProperty('countries', 'fill-opacity', 0.5) 
+    this['map'].setPaintProperty('countries', 'fill-opacity', this.state.visibilityH/100) 
   }
 
   render() {
@@ -121,7 +123,12 @@ export class Mapd extends React.Component<{},{active:any}> {
             <p className='txt-s color-gray'>{description}</p>
           </div>
           {stops.map(renderLegendKeys)}
+          the child (SliderValue) generates "my_value" and the state in the parent changes
+
+          The map transparent property is going to take the state
+          <SliderValue connectValue={(my_value)=>this.setState({visibilityH:my_value})} />
         </div>
+        
       </div>
     );
   }

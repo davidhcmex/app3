@@ -12,16 +12,48 @@
 
   <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.css' rel='stylesheet' />
   <link href='https://api.mapbox.com/mapbox-assembly/mbx/v0.18.0/assembly.min.css' rel='stylesheet'>
-  
+
+
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/jquery-ui.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/jquery-1.10.2.js"></script>
+  <script src="js/jquery-ui.js"></script>
+
 
   <title>React App</title>
+  <script>
+    $(function () {
+      let handleChange = (e, ui) => {
+        var slideEvent = new CustomEvent('slide', {
+          detail: { ui: ui, jQueryEvent: e }
+        })
+        window.dispatchEvent(slideEvent)
+      }
+      $('#slider').slider({
+        'change': handleChange,
+        'slide': handleChange
+      })
+    })
+  </script>
 </head>
 
 <body>
+
   <noscript>
     You need to enable JavaScript to run this app.
   </noscript>
-  <div id="root"></div>
+  <div>
+    <div id="root"></div>
+    <div class="container-fluid">
+      <h1>Map with Slider</h1>
+      <div id="slider"></div>
+      <div id="content"></div>
+      <!-- <script src="js/slider-buttons.js"></script>
+      <script src="js/slider-value.js"></script>
+      <script src="js/script.js"></script> -->
+    </div>
+  </div>
 </body>
 
 </html>
